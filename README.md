@@ -83,7 +83,8 @@ npm start
 
 ## Video Demo
 
-Watch the video demonstration of the application: [Demo Video](./public/demo.mp4) 
+Watch the video demonstration of the application: <br>
+<video src="https://www.loom.com/share/b9e8c20613ce4ebdaa9cd2b0bb51bb6d" controls>
 
 ## Code Quality
 
