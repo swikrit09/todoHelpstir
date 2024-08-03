@@ -83,7 +83,7 @@ npm start
 
 ## Video Demo
 
-Watch the video demonstration of the application: [Demo Video](./public/demo.webm) 
+Watch the video demonstration of the application: [Demo Video](./public/demo.mp4) 
 
 ## Code Quality
 
