@@ -1,6 +1,3 @@
-Certainly! Here's a refined `README.md` with sections for the system design overview, implementation explanation, and setup instructions:
-
-```markdown
 # Todo List Application
 
 This Todo List application is built with Next.js, featuring Server-Side Rendering (SSR) for fetching tasks and client-side logic for managing tasks. It includes functionalities such as task creation, updating, marking as completed, and searching, along with a modern glassmorphic design.
