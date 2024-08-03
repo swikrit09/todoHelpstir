@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Todo List Application
+
+This Todo List application is built with Next.js, demonstrating Server-Side Rendering (SSR) for task management. It includes features like task creation, editing, marking as completed, searching, and expandable task details.
+
+## Features
+
+- **Create Task**: Add new tasks with a title and description.
+- **Update Task**: Edit existing tasks.
+- **Mark as Done**: Mark tasks as completed.
+- **Search Tasks**: Filter tasks using a search functionality.
+- **Expandable List**: Display tasks in an expandable format, showing a description and a timestamp of the last update.
+  
+## Data Storage
+
+- Uses a dummy JSON file as a data repository for storing tasks.
+
+## Tech Stack
+
+- **Next.js**: A React framework with built-in SSR support.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: Provides type safety and error checking.
+- **Tailwind CSS**: For modern and responsive UI design.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (version 14 or later)
+- npm (version 6 or later)
+
+### Installation
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/swikrit09/todoHelpstir.git
+   cd todoHelpstir
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Build for Production
+
+To build the application for production, run:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, start the production server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## API Endpoints
 
-## Learn More
+- **GET /api/tasks**: Fetches the list of tasks.
+- **POST /api/tasks**: Adds a new task. Requires `title` and `description`.
 
-To learn more about Next.js, take a look at the following resources:
+## Implementation Details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Server-Side Rendering (SSR)**: 
+  - Uses `getServerSideProps` to fetch tasks initially, ensuring the task list is up-to-date on page load.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Real-Time Updates**: 
+  - Task list refreshes automatically when a new task is added or updated.
 
-## Deploy on Vercel
+- **URL Parameters**: 
+  - Utilized for handling search functionality, enabling users to filter tasks effectively.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Video Demo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Watch the video demonstration of the application: [Demo Video](./public/demo.webm) 
+
+## Code Quality
+
+- The code is modular, well-organized, and properly commented to facilitate understanding and future enhancements.
+

@@ -1,25 +1,22 @@
 import fs from 'fs';
 import path from 'path';
-import { NextResponse } from 'next/server';
-
-const filePath = path.join(process.cwd(), 'data', 'tasks.json');
-
-const getTasks = (): any[] => {
-    const tasksData = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(tasksData);
-};
-
-export async function GET() {
-    const tasks = getTasks();
-    return NextResponse.json(tasks);
-}
-
 
 export async function POST(req: Request) {
     const { title, description } = await req.json();
-    const tasks = getTasks();
+
+    if (!title || !description) {
+        return new Response(JSON.stringify({ error: 'Title and description are required.' }), {
+            status: 400,
+            headers: { 'Content-Type': 'application/json' },
+        });
+    }
+
+    const filePath = path.join(process.cwd(), 'data', 'tasks.json');
+    const tasksData = fs.readFileSync(filePath, 'utf8');
+    const tasks = JSON.parse(tasksData);
+
     const newTask = {
-        id: tasks.length ? tasks[tasks.length - 1].id + 1 : 1,
+        id: Date.now(),
         title,
         description,
         completed: false,
@@ -28,5 +25,9 @@ export async function POST(req: Request) {
 
     tasks.push(newTask);
     fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2));
-    return NextResponse.json(newTask);
+
+    return new Response(JSON.stringify(newTask), {
+        status: 201,
+        headers: { 'Content-Type': 'application/json' },
+    });
 }

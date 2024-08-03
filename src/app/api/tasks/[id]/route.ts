@@ -1,45 +1,53 @@
-import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const filePath = path.join(process.cwd(), 'data', 'tasks.json');
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
+    const { id } = params;
+    const { title, description, completed } = await req.json();
 
-const getTasks = (): any[] => {
+    const filePath = path.join(process.cwd(), 'data', 'tasks.json');
     const tasksData = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(tasksData);
-};
+    const tasks = JSON.parse(tasksData);
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-    const taskId = parseInt(params.id);
-    const updatedData = await req.json();
-    const tasks = getTasks();
+    const taskIndex = tasks.findIndex((task: any) => task.id === parseInt(id));
 
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
     if (taskIndex === -1) {
-        return NextResponse.json({ message: 'Task not found' }, { status: 404 });
+        return new Response(JSON.stringify({ error: 'Task not found' }), {
+            status: 404,
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
 
     const updatedTask = {
         ...tasks[taskIndex],
-        ...updatedData,
+        title: title ?? tasks[taskIndex].title,
+        description: description ?? tasks[taskIndex].description,
+        completed: completed ?? tasks[taskIndex].completed,
         updatedAt: new Date().toISOString(),
     };
 
     tasks[taskIndex] = updatedTask;
     fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2));
-    return NextResponse.json(updatedTask);
+
+    return new Response(JSON.stringify(updatedTask), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+    });
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-    const taskId = parseInt(params.id);
-    const tasks = getTasks();
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+    const { id } = params;
 
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
-    if (taskIndex === -1) {
-        return NextResponse.json({ message: 'Task not found' }, { status: 404 });
-    }
+    const filePath = path.join(process.cwd(), 'data', 'tasks.json');
+    const tasksData = fs.readFileSync(filePath, 'utf8');
+    const tasks = JSON.parse(tasksData);
 
-    tasks.splice(taskIndex, 1);
-    fs.writeFileSync(filePath, JSON.stringify(tasks, null, 2));
-    return NextResponse.json({ message: 'Task deleted successfully' });
+    const filteredTasks = tasks.filter((task: any) => task.id !== parseInt(id));
+
+    fs.writeFileSync(filePath, JSON.stringify(filteredTasks, null, 2));
+
+    return new Response(JSON.stringify({ message: 'Task deleted' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+    });
 }

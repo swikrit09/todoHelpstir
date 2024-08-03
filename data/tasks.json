@@ -1,16 +1,1 @@
-[
-  {
-    "id": 1,
-    "title": "Sample Task 2",
-    "description": "This is a sample task description.",
-    "completed": false,
-    "updatedAt": "2024-08-03T17:30:00.239Z"
-  },
-  {
-    "id": 2,
-    "title": "Take Bread",
-    "description": "From Nagesh Traders",
-    "completed": false,
-    "updatedAt": "2024-08-03T17:26:54.720Z"
-  }
-]
+[]
