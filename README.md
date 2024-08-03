@@ -36,8 +36,8 @@ The application is structured to provide a responsive and interactive user exper
 1. **Clone the Repository**
 
    ```bash
-   git clone <your-repo-url>
-   cd <your-repo-name>
+   git clone https://github.com/swikrit09/todoHelpstir
+   cd todoHelpstir
    ```
 
 2. **Install Dependencies**
